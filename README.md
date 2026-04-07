@@ -1,58 +1,88 @@
-# Tugas Praktikum Minggu 4 - State Management & MVVM
+Tentu saja\! Berikut adalah rancangan file `README.md` untuk tugas Praktikum Minggu 5 kamu. Strukturnya sudah disesuaikan persis dengan gaya README minggu lalu, namun isinya sudah di-update untuk mencerminkan penambahan sistem navigasi (Navigation Compose).
+
+Kamu tinggal menyalin teks di bawah ini dan mengganti *link* gambar *screenshot*-nya nanti setelah aplikasinya dijalankan.
+
+-----
+
+# Tugas Praktikum Minggu 5 - Navigasi Antar Layar (Navigation Compose)
 
 * **Nama : Muhammad Bimastiar**
 * **NIM : 123140211**
 
 ## Deskripsi Tugas
-Mengembangkan "My Profile App" dari minggu lalu dengan menerapkan arsitektur MVVM dan *State Management*. Berikut adalah fitur dan ketentuan yang diimplementasikan:
-1. **Implementasi MVVM Pattern:**
-    - Membuat `ProfileViewModel` dengan `StateFlow` untuk mengelola logika UI.
-    - Membuat Data class `ProfileUiState` untuk menampung seluruh state aplikasi.
-2. **Fitur Edit Profile:**
-    - Menambahkan form (Dialog) untuk mengedit nama dan bio.
-    - Menggunakan *State hoisting* untuk komponen `TextField`.
-    - Menambahkan tombol *Save* yang memperbarui data langsung ke `ViewModel`.
-3. **Fitur Dark Mode Toggle:**
-    - Menambahkan komponen `Switch` untuk mengubah tampilan ke *dark/light mode*.
-    - Menyimpan state tema di dalam `ViewModel` agar UI bereaksi secara otomatis.
+
+Mengembangkan proyek aplikasi dari minggu sebelumnya dengan mengimplementasikan Jetpack Navigation Compose untuk membuat perpindahan antar layar (*multi-screen*). Berikut adalah fitur dan ketentuan yang diimplementasikan pada praktikum ini:
+
+1.  **Bottom Navigation:**
+    - Menambahkan navigasi bawah dengan 3 tab: `Notes`, `Favorites`, dan `Profile`.
+    - Mengintegrasikan `ProfileScreen` dari tugas minggu lalu ke dalam tab Profile.
+2.  **Navigasi List ke Detail (Passing Arguments):**
+    - Menerapkan navigasi dari layar *Note List* ke *Note Detail* dengan mengirimkan argument `noteId` bertipe Integer.
+3.  **Floating Action Button (FAB):**
+    - Menambahkan FAB pada layar utama Notes untuk melakukan navigasi ke layar *Add Note* (`AddNoteScreen`).
+4.  **Navigasi Kembali (Back Navigation):**
+    - Mengimplementasikan fungsi `popBackStack()` agar pengguna dapat kembali ke layar sebelumnya dengan benar (proper) tanpa penumpukan *stack* layar yang berlebihan.
+5.  **Navigasi Edit Note:**
+    - Menambahkan navigasi dari *Note Detail* ke *Edit Note screen* yang juga mengimplementasikan *passing argument* `noteId`.
 
 ## Struktur Folder
-Proyek ini telah dirombak mengikuti standar arsitektur pemisahan *layer* (UI, Data, dan ViewModel). Berikut adalah susunan *package* utamanya:
+
+Proyek ini memperluas struktur MVVM sebelumnya dengan menambahkan *package* khusus untuk komponen UI tambahan dan pengaturan rute navigasi. Berikut adalah susunan *package* utamanya:
 
 ```text
 composeApp/src/commonMain/kotlin/org/example/project/
-├── App.kt                 # Entry point, inisialisasi ViewModel, dan MaterialTheme
+├── App.kt                 # Entry point, inisialisasi NavHost, NavController, & Scaffold (BottomBar)
+├── components/
+│   └── BottomNav.kt       # Komponen UI untuk Bottom Navigation
 ├── data/
-│   └── ProfileUiState.kt  # Data class yang menampung seluruh state layar (Model)
+│   └── ProfileUiState.kt  # (Dari Praktikum 4) Data class penampung state
+├── navigation/
+│   └── Routes.kt          # Definisi Sealed Class untuk rute layar dan argument-nya
 ├── ui/
-│   └── ProfileScreen.kt   # Berisi komponen UI utama dan Form Edit (View)
+│   ├── NotesScreens.kt    # Kumpulan layar baru: NoteList, NoteDetail, AddNote, EditNote, Favorites
+│   └── ProfileScreen.kt   # (Dari Praktikum 4) Layar profil pengguna
 └── viewmodel/
-    └── ProfileViewModel.kt# Mengelola logika bisnis dan StateFlow (ViewModel)
-````
+    └── ProfileViewModel.kt# (Dari Praktikum 4) State holder untuk layar profil
+```
 
 ## Cara Menjalankan Aplikasi (Langkah-langkah)
 
-Proyek ini menggunakan basis **Jetpack Compose Multiplatform** (Android/Desktop). Berikut adalah panduan langkah demi langkah untuk menjalankannya:
+Proyek ini menggunakan basis **Jetpack Compose Multiplatform**. Berikut adalah panduan langkah demi langkah untuk menjalankannya:
 
 1.  **Persiapan IDE:** Pastikan Anda menggunakan **Android Studio** versi terbaru.
 2.  **Buka Proyek:** Pilih menu `File > Open...` dan arahkan ke folder proyek ini.
-3.  **Tunggu Gradle Sync:** Perhatikan bagian pojok kanan bawah IDE. Tunggu hingga proses sinkronisasi Gradle selesai sepenuhnya.
+3.  **Tunggu Gradle Sync:** Pastikan *dependency* `navigation-compose` sudah terunduh dengan melihat indikator sinkronisasi Gradle di pojok kanan bawah IDE.
 4.  **Jalankan Aplikasi:** - Untuk **Android**: Pilih emulator atau perangkat fisik Android Anda, lalu klik tombol **Run** (segitiga hijau) atau tekan `Shift + F10`.
-    - Untuk **Desktop** (jika dikonfigurasi): Pilih konfigurasi Desktop (contoh: `jvmRun`), lalu tekan tombol **Run**.
+    - Untuk **Desktop**: Pilih konfigurasi Desktop (contoh: `jvmRun`), lalu tekan tombol **Run**.
 5.  **Uji Coba Fitur:** Setelah jendela aplikasi terbuka:
-    - Klik tombol **Edit Profil** untuk mencoba fitur *State Hoisting* pada Form Edit.
-    - Klik **Switch Dark Mode** di pojok kanan atas untuk melihat perubahan tema aplikasi secara reaktif.
+    - Gunakan **Bottom Navigation** di bagian bawah layar untuk berpindah antara tab *Notes*, *Favorites*, dan *Profile*.
+    - Pada tab *Notes*, klik **Floating Action Button (+)** untuk berpindah ke layar Tambah Catatan.
+    - Pada tab *Notes*, klik salah satu **Item Catatan** untuk masuk ke layar Detail (perhatikan `noteId` yang dikirim).
+    - Di layar Detail, klik tombol **Edit** untuk masuk ke form pengubahan data.
+    - Gunakan tombol **Kembali (Back)** untuk menguji implementasi `popBackStack()`.
 
 ## Hasil
 
-### 1\. Tampilan Profile View (Light Mode)
+### 1\. Tampilan Bottom Navigation (Tab Notes / Layar Utama)
 
-<img width="802" height="724" alt="image" src="https://github.com/user-attachments/assets/99ee769c-48ff-4e53-ade5-135ce98f3019" />
+*(Aplikasi menampilkan daftar catatan dan Floating Action Button)*
 
-### 2\. Tampilan Form Edit Profile
+\<img width="802" height="724" alt="Screenshot Notes List" src="MASUKKAN\_LINK\_GAMBAR\_GITHUB\_DI\_SINI" /\>
 
-<img width="801" height="722" alt="image" src="https://github.com/user-attachments/assets/4bd4451f-3ae0-42c6-a236-a7bdf69c3574" />
+### 2\. Tampilan Navigasi Detail & Passing Argument
 
-### 3\. Tampilan Profile View (Dark Mode)
+*(Layar NoteDetailScreen yang berhasil menangkap `noteId`)*
 
-<img width="802" height="723" alt="image" src="https://github.com/user-attachments/assets/5c4c0ac7-cbd0-4670-8182-7285f54a2703" />
+\<img width="802" height="724" alt="Screenshot Note Detail" src="MASUKKAN\_LINK\_GAMBAR\_GITHUB\_DI\_SINI" /\>
+
+### 3\. Tampilan Layar Tambah / Edit Catatan
+
+*(Layar saat navigasi form edit/add terbuka)*
+
+\<img width="802" height="724" alt="Screenshot Add/Edit Note" src="MASUKKAN\_LINK\_GAMBAR\_GITHUB\_DI\_SINI" /\>
+
+### 4\. Tampilan Tab Profile Terintegrasi
+
+*(Layar profil dari tugas sebelumnya yang kini masuk ke dalam tab navigasi)*
+
+\<img width="802" height="724" alt="Screenshot Profile Tab" src="MASUKKAN\_LINK\_GAMBAR\_GITHUB\_DI\_SINI" /\>
