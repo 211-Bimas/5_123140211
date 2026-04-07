@@ -61,22 +61,22 @@ Proyek ini menggunakan basis **Jetpack Compose Multiplatform**. Berikut adalah p
 
 *(Aplikasi menampilkan daftar catatan dan Floating Action Button)*
 
-\<img width="802" height="724" alt="Screenshot Notes List" src="MASUKKAN\_LINK\_GAMBAR\_GITHUB\_DI\_SINI" /\>
+<img width="284" height="618" alt="image" src="https://github.com/user-attachments/assets/baa89c6d-5c33-4222-8ce3-935422f0df9d" />
 
 ### 2\. Tampilan Navigasi Detail & Passing Argument
 
 *(Layar NoteDetailScreen yang berhasil menangkap `noteId`)*
 
-\<img width="802" height="724" alt="Screenshot Note Detail" src="MASUKKAN\_LINK\_GAMBAR\_GITHUB\_DI\_SINI" /\>
+<img width="284" height="611" alt="image" src="https://github.com/user-attachments/assets/25b88f97-ea7d-4b2c-a211-f5e9d80ba7d5" />
 
 ### 3\. Tampilan Layar Tambah / Edit Catatan
 
 *(Layar saat navigasi form edit/add terbuka)*
 
-\<img width="802" height="724" alt="Screenshot Add/Edit Note" src="MASUKKAN\_LINK\_GAMBAR\_GITHUB\_DI\_SINI" /\>
+<img width="282" height="618" alt="image" src="https://github.com/user-attachments/assets/34208bce-735e-49b7-8b6a-f2cfdbf43cf8" />
 
 ### 4\. Tampilan Tab Profile Terintegrasi
 
 *(Layar profil dari tugas sebelumnya yang kini masuk ke dalam tab navigasi)*
 
-\<img width="802" height="724" alt="Screenshot Profile Tab" src="MASUKKAN\_LINK\_GAMBAR\_GITHUB\_DI\_SINI" /\>
+<img width="285" height="613" alt="image" src="https://github.com/user-attachments/assets/ba7eae78-6629-4b56-afde-639ca276e1d9" />
