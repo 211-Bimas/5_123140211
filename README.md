@@ -1,9 +1,3 @@
-Tentu saja\! Berikut adalah rancangan file `README.md` untuk tugas Praktikum Minggu 5 kamu. Strukturnya sudah disesuaikan persis dengan gaya README minggu lalu, namun isinya sudah di-update untuk mencerminkan penambahan sistem navigasi (Navigation Compose).
-
-Kamu tinggal menyalin teks di bawah ini dan mengganti *link* gambar *screenshot*-nya nanti setelah aplikasinya dijalankan.
-
------
-
 # Tugas Praktikum Minggu 5 - Navigasi Antar Layar (Navigation Compose)
 
 * **Nama : Muhammad Bimastiar**
