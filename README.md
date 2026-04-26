@@ -57,16 +57,18 @@ Proyek ini menggunakan basis **Jetpack Compose Multiplatform**. Berikut panduann
 
 ![img.png](img.png)
 
+
 ### 2. Tampilan Tambah/Edit Catatan
 *(Layar interaktif dengan form input untuk menyimpan data ke ViewModel)*
 
-
+![img_1.png](img_1.png)
 
 ### 3. Tampilan Favorit & Detail Catatan
 *(Navigasi detail argument dan list catatan favorit)*
 
-
+![img_2.png](img_2.png)
 
 ### 4. Tampilan Profile & Dark Mode
 *(Layar profil dari tugas sebelumnya yang warnanya menyesuaikan tema aplikasi)*
 
+![img_3.png](img_3.png)
