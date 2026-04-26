@@ -56,12 +56,13 @@ Proyek ini menggunakan basis **Jetpack Compose Multiplatform**. Berikut panduann
 *(Tampilan saat aplikasi baru dibuka dan setelah catatan ditambahkan)*
 
 ![img.png](img.png)
-
+![img_1.png](img_1.png)
+![img_4.png](img_4.png)
 
 ### 2. Tampilan Tambah/Edit Catatan
 *(Layar interaktif dengan form input untuk menyimpan data ke ViewModel)*
 
-![img_1.png](img_1.png)
+![img_5.png](img_5.png)
 
 ### 3. Tampilan Favorit & Detail Catatan
 *(Navigasi detail argument dan list catatan favorit)*
