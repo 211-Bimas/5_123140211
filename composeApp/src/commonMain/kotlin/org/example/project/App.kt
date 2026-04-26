@@ -18,86 +18,83 @@ import org.example.project.navigation.BottomNavItem
 import org.example.project.navigation.Screen
 import org.example.project.ui.*
 import org.example.project.viewmodel.ProfileViewModel
+import org.example.project.viewmodel.NotesViewModel // <-- IMPORT BARU
 
 @Composable
 fun App() {
-    // 1. Inisialisasi NavController
     val navController = rememberNavController()
 
-    // 2. Inisialisasi ViewModel Tugas 4 kamu (ProfileViewModel)
-    val viewModel = remember { ProfileViewModel() }
-    val uiState by viewModel.uiState.collectAsState()
+    // ViewModel Profil (Dari Minggu 4)
+    val profileViewModel = remember { ProfileViewModel() }
+    val profileUiState by profileViewModel.uiState.collectAsState()
 
-    // Tema dinamis dari Tugas 4
-    val colorScheme = if (uiState.isDarkMode) darkColorScheme() else lightColorScheme()
+    // ViewModel Notes (BARU)
+    val notesViewModel = remember { NotesViewModel() }
+    val notesList by notesViewModel.notes.collectAsState()
+
+    val colorScheme = if (profileUiState.isDarkMode) darkColorScheme() else lightColorScheme()
 
     MaterialTheme(colorScheme = colorScheme) {
-        // 3. Pasang Scaffold dengan BottomBar
         Scaffold(
             bottomBar = { BottomNav(navController = navController) }
         ) { paddingValues ->
-            // 4. NavHost pengatur navigasi
             NavHost(
                 navController = navController,
                 startDestination = BottomNavItem.Notes.route,
                 modifier = Modifier.padding(paddingValues)
             ) {
-                // =============== BOTTOM NAV TAB TABS ===============
+                // =============== BOTTOM TABS ===============
                 composable(BottomNavItem.Notes.route) {
                     NoteListScreen(
-                        onNoteClick = { noteId ->
-                            navController.navigate(Screen.NoteDetail.createRoute(noteId))
-                        },
-                        onAddClick = {
-                            navController.navigate(Screen.AddNote.route)
-                        }
+                        notes = notesList,
+                        onNoteClick = { id -> navController.navigate(Screen.NoteDetail.createRoute(id)) },
+                        onAddClick = { navController.navigate(Screen.AddNote.route) },
+                        onToggleFav = { id -> notesViewModel.toggleFavorite(id) }
                     )
                 }
-
                 composable(BottomNavItem.Favorites.route) {
-                    FavoritesScreen()
+                    FavoritesScreen(
+                        notes = notesList,
+                        onNoteClick = { id -> navController.navigate(Screen.NoteDetail.createRoute(id)) },
+                        onToggleFav = { id -> notesViewModel.toggleFavorite(id) }
+                    )
                 }
-
                 composable(BottomNavItem.Profile.route) {
-                    // Masukkan kode ProfileScreen dari tugas minggu 4!
                     ProfileScreen(
-                        uiState = uiState,
-                        onEditProfile = { newName, newBio ->
-                            viewModel.updateProfile(newName, newBio)
-                        },
-                        onToggleDarkMode = { isDark ->
-                            viewModel.toggleDarkMode(isDark)
-                        }
+                        uiState = profileUiState,
+                        onEditProfile = { name, bio -> profileViewModel.updateProfile(name, bio) },
+                        onToggleDarkMode = { isDark -> profileViewModel.toggleDarkMode(isDark) }
                     )
                 }
 
-                // =============== SCREEN LAINNYA ===============
-                // Navigasi dengan arguments 'noteId'
+                // =============== SCREEN DETAIL & EDIT ===============
                 composable(
                     route = Screen.NoteDetail.route,
                     arguments = listOf(navArgument("noteId") { type = NavType.IntType })
                 ) { backStackEntry ->
-                    val noteId = backStackEntry.arguments?.getInt("noteId") ?: 0
+                    val noteId = backStackEntry.arguments?.getInt("noteId") ?: -1
                     NoteDetailScreen(
-                        noteId = noteId,
-                        onBack = { navController.popBackStack() }, // Back Button Proper
-                        onEdit = { id ->
-                            navController.navigate(Screen.EditNote.createRoute(id))
-                        }
+                        note = notesViewModel.getNoteById(noteId),
+                        onBack = { navController.popBackStack() },
+                        onEdit = { id -> navController.navigate(Screen.EditNote.createRoute(id)) }
                     )
                 }
 
                 composable(Screen.AddNote.route) {
-                    AddNoteScreen(onBack = { navController.popBackStack() })
+                    AddNoteScreen(
+                        onSave = { title, content -> notesViewModel.addNote(title, content) },
+                        onBack = { navController.popBackStack() }
+                    )
                 }
 
                 composable(
                     route = Screen.EditNote.route,
                     arguments = listOf(navArgument("noteId") { type = NavType.IntType })
                 ) { backStackEntry ->
-                    val noteId = backStackEntry.arguments?.getInt("noteId") ?: 0
+                    val noteId = backStackEntry.arguments?.getInt("noteId") ?: -1
                     EditNoteScreen(
-                        noteId = noteId,
+                        note = notesViewModel.getNoteById(noteId),
+                        onSave = { id, title, content -> notesViewModel.updateNote(id, title, content) },
                         onBack = { navController.popBackStack() }
                     )
                 }
