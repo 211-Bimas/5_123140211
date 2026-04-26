@@ -16,7 +16,11 @@ Mengembangkan proyek aplikasi dari minggu sebelumnya dengan mengimplementasikan 
     - *Extra:* Tidak hanya sekadar dummy UI, aplikasi ini menggunakan `NotesViewModel` dengan `StateFlow` agar pengguna bisa benar-benar **menambah**, **mengedit**, dan menyematkan catatan sebagai **Favorit**.
 4. **Peningkatan UI/UX (Material Design 3):**
     - *Extra:* Tampilan dipercantik menggunakan komponen Material 3, seperti *Elevated Card*, *Extended Floating Action Button*, serta penanganan *Empty State* (layar kosong) yang interaktif jika tidak ada catatan.
-
+5. **[BONUS +10%] Navigation Drawer & Top App Bar:**
+    - Mengimplementasikan `ModalNavigationDrawer` yang berisi menu samping.
+    - Menambahkan komponen `TopAppBar` dinamis dengan ikon *Hamburger Menu* untuk membuka Drawer.
+    - Menambahkan rute dan layar baru (`AboutScreen`) yang secara eksklusif dapat diakses melalui Navigation Drawer.
+   
 ## Struktur Folder
 Proyek ini mengadopsi pemisahan *layer* yang terstruktur (UI, ViewModels, Navigation). Berikut adalah susunan *package* utamanya:
 
@@ -56,20 +60,21 @@ Proyek ini menggunakan basis **Jetpack Compose Multiplatform**. Berikut panduann
 *(Tampilan saat aplikasi baru dibuka dan setelah catatan ditambahkan)*
 
 ![img.png](img.png)
-![img_1.png](img_1.png)
-![img_4.png](img_4.png)
 
 ### 2. Tampilan Tambah/Edit Catatan
 *(Layar interaktif dengan form input untuk menyimpan data ke ViewModel)*
 
-![img_5.png](img_5.png)
+![img_1.png](img_1.png)
 
 ### 3. Tampilan Favorit & Detail Catatan
 *(Navigasi detail argument dan list catatan favorit)*
 
 ![img_2.png](img_2.png)
+![img_3.png](img_3.png)
 
 ### 4. Tampilan Profile & Dark Mode
 *(Layar profil dari tugas sebelumnya yang warnanya menyesuaikan tema aplikasi)*
 
-![img_3.png](img_3.png)
+![img_4.png](img_4.png)
+
+### 5. Vidio Demo

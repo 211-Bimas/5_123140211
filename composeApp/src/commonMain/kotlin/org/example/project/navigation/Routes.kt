@@ -15,6 +15,7 @@ sealed class Screen(val route: String) {
     object EditNote : Screen("edit_note/{noteId}") {
         fun createRoute(noteId: Int) = "edit_note/$noteId"
     }
+    object About : Screen("about")
 }
 
 // 2. Rute khusus untuk Bottom Navigation Tabs

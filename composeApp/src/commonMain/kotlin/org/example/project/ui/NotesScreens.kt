@@ -237,3 +237,30 @@ fun EditNoteScreen(note: Note?, onSave: (Int, String, String) -> Unit, onBack: (
         }
     }
 }
+
+// --- 6. LAYAR ABOUT (DARI DRAWER) ---
+@Composable
+fun AboutScreen() {
+    Column(
+        modifier = Modifier.fillMaxSize().padding(32.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        Icon(
+            imageVector = Icons.Default.Info,
+            contentDescription = "Info",
+            modifier = Modifier.size(80.dp),
+            tint = MaterialTheme.colorScheme.primary
+        )
+        Spacer(Modifier.height(16.dp))
+        Text("My Notes App", style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold)
+        Spacer(Modifier.height(8.dp))
+        Text("Versi 1.0 (KMP)", style = MaterialTheme.typography.bodyLarge)
+        Spacer(Modifier.height(24.dp))
+        Text(
+            text = "Dibuat oleh Muhammad Bimastiar (123140211) untuk memenuhi tugas Praktikum PAM Minggu 5 dengan tambahan bonus Navigation Drawer.",
+            textAlign = androidx.compose.ui.text.style.TextAlign.Center,
+            color = MaterialTheme.colorScheme.onSurfaceVariant
+        )
+    }
+}
